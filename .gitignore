@@ -6,3 +6,5 @@ gradle.properties
 *.ipr
 *.iws
 .idea/
+
+!.java-version

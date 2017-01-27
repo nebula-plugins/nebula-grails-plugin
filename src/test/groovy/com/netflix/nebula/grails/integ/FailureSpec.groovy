@@ -34,7 +34,11 @@ class FailureSpec extends IntegSpec {
         """
 
         when:
-        launcher("init", "-s").run().rethrowFailure()
+        def result = launcher("init", "-s").run()
+        if (!result.success) {
+            println(result.standardError)
+            result.rethrowFailure()
+        }
         def buildConfig = file("grails-app/conf/BuildConfig.groovy")
         buildConfig.text = buildConfig.text.replace("dependencies {", "dependencies {\ncompile('org.spockframework:spock-grails-support:0.7-groovy-1.8')")
         println buildConfig.text
