@@ -157,4 +157,17 @@ class ${project.name.capitalize()}GrailsPlugin { }
         then:
         notThrown(Exception)
     }
+
+    def "grails.nebula plugin can be applied after java plugin"() {
+        given:
+        project = ProjectBuilder.builder().build()
+
+        project.apply plugin: "java"
+        project.apply plugin: "nebula.grails"
+        project.grails.grailsVersion = '2.0.0'
+        project.evaluate()
+
+        expect:
+        assert project.tasks.findByName('test')
+    }
 }
