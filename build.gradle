@@ -33,6 +33,7 @@ dependencies {
     compile ('org.grails:grails-launcher:1.1') {
         exclude module: 'groovy-all'
     }
+    testCompile "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17"
 }
 
 pluginBundle {
