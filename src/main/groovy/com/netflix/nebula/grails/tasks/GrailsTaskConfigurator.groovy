@@ -47,7 +47,7 @@ class GrailsTaskConfigurator {
         }
 
         //Create the Grails test task.
-        project.tasks.create(GRAILS_TEST_TASK, GrailsTestTask)
+        project.tasks.create(name: GRAILS_TEST_TASK, type: GrailsTestTask, overwrite: true)
 
         //Create a task rule that converts any task with that starts with 'grail-' into an invocation of
         //the corresponding Grails script
