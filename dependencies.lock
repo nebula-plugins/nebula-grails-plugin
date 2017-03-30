@@ -1,0 +1,122 @@
+{
+    "compile": {
+        "org.grails:grails-launcher": {
+            "locked": "1.1",
+            "requested": "1.1"
+        }
+    },
+    "compileClasspath": {
+        "org.grails:grails-launcher": {
+            "locked": "1.1",
+            "requested": "1.1"
+        }
+    },
+    "default": {
+        "org.grails:grails-launcher": {
+            "locked": "1.1",
+            "requested": "1.1"
+        }
+    },
+    "integTestCompile": {
+        "com.netflix.nebula:nebula-test": {
+            "locked": "6.0.0",
+            "requested": "6.0.0"
+        },
+        "org.grails:grails-launcher": {
+            "locked": "1.1",
+            "requested": "1.1"
+        }
+    },
+    "integTestCompileClasspath": {
+        "com.netflix.nebula:nebula-test": {
+            "locked": "6.0.0",
+            "requested": "6.0.0"
+        },
+        "org.grails:grails-launcher": {
+            "locked": "1.1",
+            "requested": "1.1"
+        }
+    },
+    "integTestRuntime": {
+        "com.netflix.nebula:nebula-test": {
+            "locked": "6.0.0",
+            "requested": "6.0.0"
+        },
+        "org.grails:grails-launcher": {
+            "locked": "1.1",
+            "requested": "1.1"
+        }
+    },
+    "integTestRuntimeClasspath": {
+        "com.netflix.nebula:nebula-test": {
+            "locked": "6.0.0",
+            "requested": "6.0.0"
+        },
+        "org.grails:grails-launcher": {
+            "locked": "1.1",
+            "requested": "1.1"
+        }
+    },
+    "jacocoAgent": {
+        "org.jacoco:org.jacoco.agent": {
+            "locked": "0.7.8"
+        }
+    },
+    "jacocoAnt": {
+        "org.jacoco:org.jacoco.ant": {
+            "locked": "0.7.8"
+        }
+    },
+    "runtime": {
+        "org.grails:grails-launcher": {
+            "locked": "1.1",
+            "requested": "1.1"
+        }
+    },
+    "runtimeClasspath": {
+        "org.grails:grails-launcher": {
+            "locked": "1.1",
+            "requested": "1.1"
+        }
+    },
+    "testCompile": {
+        "com.netflix.nebula:nebula-test": {
+            "locked": "6.0.0",
+            "requested": "6.0.0"
+        },
+        "org.grails:grails-launcher": {
+            "locked": "1.1",
+            "requested": "1.1"
+        }
+    },
+    "testCompileClasspath": {
+        "com.netflix.nebula:nebula-test": {
+            "locked": "6.0.0",
+            "requested": "6.0.0"
+        },
+        "org.grails:grails-launcher": {
+            "locked": "1.1",
+            "requested": "1.1"
+        }
+    },
+    "testRuntime": {
+        "com.netflix.nebula:nebula-test": {
+            "locked": "6.0.0",
+            "requested": "6.0.0"
+        },
+        "org.grails:grails-launcher": {
+            "locked": "1.1",
+            "requested": "1.1"
+        }
+    },
+    "testRuntimeClasspath": {
+        "com.netflix.nebula:nebula-test": {
+            "locked": "6.0.0",
+            "requested": "6.0.0"
+        },
+        "org.grails:grails-launcher": {
+            "locked": "1.1",
+            "requested": "1.1"
+        }
+    }
+}
