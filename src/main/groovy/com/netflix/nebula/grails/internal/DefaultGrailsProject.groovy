@@ -120,9 +120,8 @@ public class DefaultGrailsProject implements GrailsProject {
      */
     public MavenArtifactRepository central() {
         project.repositories.maven { MavenArtifactRepository repository ->
-            repository.url = 'http://repo.grails.org/grails/repo'
+            repository.url = 'http://repo.grails.org/grails/core'
             repository.name = 'Grails Central'
         }
     }
-
 }
