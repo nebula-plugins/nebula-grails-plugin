@@ -118,10 +118,16 @@ public class DefaultGrailsProject implements GrailsProject {
      * }
      *
      */
-    public MavenArtifactRepository central() {
-        project.repositories.maven { MavenArtifactRepository repository ->
+    public List<MavenArtifactRepository> central() {
+        def repositories = project.repositories
+        def core = repositories.maven { MavenArtifactRepository repository ->
             repository.url = 'http://repo.grails.org/grails/core'
-            repository.name = 'Grails Central'
+            repository.name = 'Grails Core'
         }
+        def plugins = repositories.maven { MavenArtifactRepository repository ->
+            repository.url = 'http://repo.grails.org/grails/plugins'
+            repository.name = 'Grails Plugins'
+        }
+        return [core, plugins]
     }
 }

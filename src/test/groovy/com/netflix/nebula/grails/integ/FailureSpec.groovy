@@ -16,9 +16,6 @@
 
 package com.netflix.nebula.grails.integ
 
-import spock.lang.Ignore
-
-@Ignore("This is hanging on connect to the remote repository - all bets are off on compatibility")
 class FailureSpec extends IntegSpec {
     def "handles failure"() {
         given:
