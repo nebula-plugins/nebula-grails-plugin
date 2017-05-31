@@ -21,7 +21,6 @@ import org.gradle.api.InvalidUserDataException
 import org.gradle.api.Project
 import org.gradle.api.artifacts.repositories.MavenArtifactRepository
 import org.gradle.api.internal.project.ProjectInternal
-import org.gradle.listener.ActionBroadcast
 import com.netflix.nebula.grails.GrailsProject
 
 /**
@@ -129,5 +128,18 @@ public class DefaultGrailsProject implements GrailsProject {
             repository.name = 'Grails Plugins'
         }
         return [core, plugins]
+    }
+
+    private static class ActionBroadcast<T> implements Action<T> {
+        private final List<Action<? super T>> actions = new ArrayList<>()
+
+        void add(Action<? super T> action) {
+            actions.add(action)
+        }
+
+        @Override
+        void execute(T t) {
+            actions.each { it.execute(t) }
+        }
     }
 }
