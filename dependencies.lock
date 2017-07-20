@@ -19,7 +19,7 @@
     },
     "integTestCompile": {
         "com.netflix.nebula:nebula-test": {
-            "locked": "6.1.0",
+            "locked": "6.1.1",
             "requested": "6.+"
         },
         "org.grails:grails-launcher": {
@@ -29,7 +29,7 @@
     },
     "integTestCompileClasspath": {
         "com.netflix.nebula:nebula-test": {
-            "locked": "6.1.0",
+            "locked": "6.1.1",
             "requested": "6.+"
         },
         "org.grails:grails-launcher": {
@@ -39,7 +39,7 @@
     },
     "integTestRuntime": {
         "com.netflix.nebula:nebula-test": {
-            "locked": "6.1.0",
+            "locked": "6.1.1",
             "requested": "6.+"
         },
         "org.grails:grails-launcher": {
@@ -49,7 +49,7 @@
     },
     "integTestRuntimeClasspath": {
         "com.netflix.nebula:nebula-test": {
-            "locked": "6.1.0",
+            "locked": "6.1.1",
             "requested": "6.+"
         },
         "org.grails:grails-launcher": {
@@ -81,7 +81,7 @@
     },
     "testCompile": {
         "com.netflix.nebula:nebula-test": {
-            "locked": "6.1.0",
+            "locked": "6.1.1",
             "requested": "6.+"
         },
         "org.grails:grails-launcher": {
@@ -91,7 +91,7 @@
     },
     "testCompileClasspath": {
         "com.netflix.nebula:nebula-test": {
-            "locked": "6.1.0",
+            "locked": "6.1.1",
             "requested": "6.+"
         },
         "org.grails:grails-launcher": {
@@ -101,7 +101,7 @@
     },
     "testRuntime": {
         "com.netflix.nebula:nebula-test": {
-            "locked": "6.1.0",
+            "locked": "6.1.1",
             "requested": "6.+"
         },
         "org.grails:grails-launcher": {
@@ -111,7 +111,7 @@
     },
     "testRuntimeClasspath": {
         "com.netflix.nebula:nebula-test": {
-            "locked": "6.1.0",
+            "locked": "6.1.1",
             "requested": "6.+"
         },
         "org.grails:grails-launcher": {
