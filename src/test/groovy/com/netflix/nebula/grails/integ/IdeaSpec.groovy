@@ -18,6 +18,8 @@ package com.netflix.nebula.grails.integ
 
 class IdeaSpec extends IntegSpec {
     def "dependencies carry over to idea module file"() {
+        fork = false
+
         given:
         buildFile << """
             apply plugin: 'idea'
@@ -32,7 +34,7 @@ class IdeaSpec extends IntegSpec {
         """
 
         when:
-        launcher("idea", "-s").run().rethrowFailure()
+        runTasksSuccessfully("idea")
 
         then:
         runTasksSuccessfully("ideaModule")

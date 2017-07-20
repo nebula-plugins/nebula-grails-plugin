@@ -34,7 +34,7 @@ class FailureSpec extends IntegSpec {
         """
 
         when:
-        def result = launcher("init", "-s").run()
+        def result = runTasks("init", "-s")
         if (!result.success) {
             println(result.standardError)
             result.rethrowFailure()
