@@ -17,6 +17,14 @@
 package com.netflix.nebula.grails.integ
 
 class FailureSpec extends IntegSpec {
+    def setup() {
+        System.setProperty('ignoreDeprecations', 'true')
+    }
+
+    def cleanup() {
+        System.clearProperty('ignoreDeprecations')
+    }
+
     def "handles failure"() {
         given:
         buildFile << """
