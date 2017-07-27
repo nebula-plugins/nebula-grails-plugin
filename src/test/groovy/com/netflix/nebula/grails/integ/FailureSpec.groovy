@@ -28,7 +28,14 @@ class FailureSpec extends IntegSpec {
     def "handles failure"() {
         given:
         buildFile << """
-            grails.grailsVersion '2.0.1'
+            grails {
+                grailsVersion '2.3.5'
+                groovyVersion '2.1.9'
+            }
+
+            dependencies {
+                bootstrap 'org.grails.plugins:tomcat:7.0.50'
+            }
         """
 
         buildFile << """
@@ -44,13 +51,19 @@ class FailureSpec extends IntegSpec {
         when:
         def result = runTasks("init", "-s")
         if (!result.success) {
+            println(result.standardOutput)
             println(result.standardError)
             result.rethrowFailure()
         }
         def buildConfig = file("grails-app/conf/BuildConfig.groovy")
         buildConfig.text = buildConfig.text.replace("dependencies {", "dependencies {\ncompile('org.spockframework:spock-grails-support:0.7-groovy-1.8')")
         println buildConfig.text
-        runTasksSuccessfully("package")
+        result = runTasks("package")
+        if (!result.success) {
+            println(result.standardOutput)
+            println(result.standardError)
+            result.rethrowFailure()
+        }
 
         then:
         file("grails-app").exists()
