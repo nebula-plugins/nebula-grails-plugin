@@ -19,13 +19,18 @@ package com.netflix.nebula.grails
 import org.gradle.api.InvalidUserDataException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.XmlProvider
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.ConfigurationContainer
+import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.DependencyResolveDetails
+import org.gradle.api.artifacts.ResolvedDependency
+import org.gradle.api.component.Artifact
 import org.gradle.api.internal.ConventionMapping
 import org.gradle.api.internal.file.FileResolver
 import org.gradle.api.plugins.BasePlugin
 import org.gradle.api.plugins.GroovyBasePlugin
+import org.gradle.api.publish.ivy.IvyPublication
 import org.gradle.internal.reflect.Instantiator
 import com.netflix.nebula.grails.dependencies.DependencyConfigurer
 import com.netflix.nebula.grails.dependencies.DependencyConfigurerFactory
@@ -145,6 +150,32 @@ class GrailsPlugin implements Plugin<Project> {
         }
         configureIdea(project)
         configureEclipse(project)
+
+        project.publishing {
+            publications {
+                withType(IvyPublication) {
+                    artifact(project.tasks.findByName(GrailsTaskConfigurator.GRAILS_PACKAGE_PLUGIN_TASK).outputFile) {
+                        conf "runtime"
+                    }
+                    descriptor.withXml { XmlProvider xml ->
+                        def root = xml.asNode()
+                        def deps = root.dependencies[0]
+                        deps.@defaultconfmapping = "%->default"
+                        def runtimeClasspath = project.configurations.runtimeClasspath
+                        Map<String, String> revConstraintLookup = runtimeClasspath.allDependencies.collectEntries { Dependency dep ->
+                            [(dep.group + ':' + dep.name) : dep.version]
+                        }
+                        runtimeClasspath.resolvedConfiguration.firstLevelModuleDependencies.each { ResolvedDependency dep ->
+                            deps.appendNode('dependency', ['org': dep.moduleGroup,
+                                                           'name': dep.moduleName,
+                                                           'rev': dep.moduleVersion,
+                                                           'conf': 'runtime->default',
+                                                           'revConstraint': revConstraintLookup[(dep.moduleGroup + ':' + dep.moduleName)]])
+                        }
+                    }
+                }
+            }
+        }
     }
 
     void configureTasks(Project project, GrailsProject grailsProject) {
