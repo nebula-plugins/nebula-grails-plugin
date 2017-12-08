@@ -156,7 +156,7 @@ class GrailsPlugin implements Plugin<Project> {
             project.publishing {
                 publications {
                     withType(IvyPublication) {
-                        artifact(project.tasks.findByName(GrailsTaskConfigurator.GRAILS_PACKAGE_PLUGIN_TASK).outputFile) {
+                        artifact(getGrailsOutputArtifact(project)) {
                             conf "runtime"
                         }
                         descriptor.withXml { XmlProvider xml ->
@@ -179,6 +179,27 @@ class GrailsPlugin implements Plugin<Project> {
                 }
             }
         }
+    }
+
+    File getGrailsOutputArtifact(Project project) {
+        if (isGrailsPluginProject(project)) {
+            project.tasks.findByName(GrailsTaskConfigurator.GRAILS_PACKAGE_PLUGIN_TASK).outputFile
+        } else {
+            project.tasks.findByName(GrailsTaskConfigurator.GRAILS_WAR_TASK).outputFile
+        }
+    }
+
+    File grailsPluginFile(Project project) {
+        project.projectDir.listFiles().find { it.name.endsWith('GrailsPlugin.groovy') }
+    }
+
+    File grailsPluginTemplateFile(Project project) {
+        project.projectDir.listFiles().find { it.name.endsWith('GrailsPlugin.groovy.template') }
+    }
+
+    boolean isGrailsPluginProject(Project project) {
+        grailsPluginFile(project) as boolean ||
+                grailsPluginTemplateFile(project) as boolean // We will have a file with the existence of a template
     }
 
     void configureTasks(Project project, GrailsProject grailsProject) {
