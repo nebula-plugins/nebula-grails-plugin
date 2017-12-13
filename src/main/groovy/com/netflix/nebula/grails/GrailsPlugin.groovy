@@ -69,7 +69,7 @@ class GrailsPlugin implements Plugin<Project> {
         Configuration bootstrapConfiguration = getOrCreateConfiguration(project, "bootstrap")
 
         Configuration compileConfiguration = getOrCreateConfiguration(project, "compile")
-        Configuration providedConfiguration = getOrCreateConfiguration(project, "provided")
+        Configuration compileOnlyConfiguration = getOrCreateConfiguration(project, "compileOnly")
         Configuration runtimeConfiguration = getOrCreateConfiguration(project, "runtime")
         Configuration testConfiguration = getOrCreateConfiguration(project, "test")
         Configuration resourcesConfiguration = getOrCreateConfiguration(project, "resources")
@@ -81,7 +81,7 @@ class GrailsPlugin implements Plugin<Project> {
         grailsProject.onSetGrailsVersion { String grailsVersion ->
             DependencyConfigurer dependenciesUtil = DependencyConfigurerFactory.build(project, grailsProject)
             dependenciesUtil.configureBootstrapClasspath(bootstrapConfiguration)
-            dependenciesUtil.configureProvidedClasspath(providedConfiguration)
+            dependenciesUtil.configureCompileOnlyClasspath(compileOnlyConfiguration)
             dependenciesUtil.configureCompileClasspath(compileConfiguration)
             dependenciesUtil.configureRuntimeClasspath(runtimeConfiguration)
             dependenciesUtil.configureTestClasspath(testConfiguration)
@@ -120,7 +120,7 @@ class GrailsPlugin implements Plugin<Project> {
 
                 map("bootstrapClasspath") { bootstrapConfiguration }
 
-                map("providedClasspath") { providedConfiguration }
+                map("providedClasspath") { compileOnlyConfiguration }
                 map("compileClasspath") { compileConfiguration }
                 map("runtimeClasspath") { runtimeConfiguration }
                 map("testClasspath") { testConfiguration }

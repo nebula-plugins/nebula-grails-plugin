@@ -34,10 +34,10 @@ class IdeaSpec extends IntegSpec {
         """
 
         when:
-        runTasksSuccessfully("idea")
+        runTasksSuccessfully("idea", '-DignoreDeprecations=true')
 
         then:
-        runTasksSuccessfully("ideaModule")
+        runTasksSuccessfully("ideaModule", '-DignoreDeprecations=true')
 
         and:
         File moduleFile = new File(projectDir, "${moduleName}.iml")

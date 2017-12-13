@@ -49,7 +49,7 @@ class GrailsDependenciesConfigurer extends DependencyConfigurer {
         addGroovyDependency(configuration)
     }
 
-    void configureProvidedClasspath(Configuration configuration) {
+    void configureCompileOnlyClasspath(Configuration configuration) {
 
     }
 

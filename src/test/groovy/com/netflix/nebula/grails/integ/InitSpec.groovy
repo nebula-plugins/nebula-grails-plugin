@@ -23,6 +23,7 @@ import spock.lang.Unroll
 class InitSpec extends IntegSpec {
     def "can execute grails #initTask for #grailsVersion project"() {
         given:
+
         settingsFile.delete()
         settingsFile << """
             rootProject.name = 'grails-project'
@@ -65,7 +66,7 @@ class InitSpec extends IntegSpec {
         }
 
         when:
-        runTasksSuccessfully(initTask)
+        runTasksSuccessfully(initTask, '-DignoreDeprecations=true')
 
         then:
         file("grails-app").exists()

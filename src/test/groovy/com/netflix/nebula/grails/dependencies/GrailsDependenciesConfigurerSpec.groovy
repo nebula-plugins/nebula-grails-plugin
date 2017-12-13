@@ -57,7 +57,7 @@ class GrailsDependenciesConfigurerSpec extends Specification {
         then:
         interaction {
             bootstrap.each { hasDependency(project.configurations.bootstrap, it) }
-            provided.each { hasDependency(project.configurations.provided, it) }
+            compileOnly.each { hasDependency(project.configurations.compileOnly, it) }
             compile.each { hasDependency(project.configurations.compile, it) }
             runtime.each { hasDependency(project.configurations.runtime, it) }
             test.each { hasDependency(project.configurations.test, it) }
@@ -79,7 +79,7 @@ class GrailsDependenciesConfigurerSpec extends Specification {
                         'org.grails:grails-resources:2.4.0'
                 ]
         ]
-        provided << [
+        compileOnly << [
                 [], []
         ]
         compile << [
