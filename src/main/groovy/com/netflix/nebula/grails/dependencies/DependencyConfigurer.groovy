@@ -30,7 +30,7 @@ abstract class DependencyConfigurer {
 
     abstract void configureGroovyBootstrapClasspath(Configuration configuration)
 
-    abstract void configureProvidedClasspath(Configuration configuration)
+    abstract void configureCompileOnlyClasspath(Configuration configuration)
 
     abstract void configureCompileClasspath(Configuration configuration)
 
