@@ -46,7 +46,7 @@ class GrailsEclipseJdtGroovyTaskSpec extends PluginSpec {
 
     def 'test eclipse jdt groovy prefs'() {
         when:
-        project.tasks.getByName('eclipseJdtGroovy').execute()
+        project.tasks.getByName('eclipseJdtGroovy').createJdtGroovyPrefs()
 
         then:
         def eclipseJdtGroovy = project.tasks.findByName('eclipseJdtGroovy')
