@@ -16,7 +16,7 @@
 
 
 plugins {
-    id 'nebula.plugin-plugin' version '7.1.10'
+    id 'nebula.plugin-plugin' version '8.0.0'
 }
 
 description 'Fork of the Grails 2.x Gradle plugin providing later Gradle version and plugin portal support'
