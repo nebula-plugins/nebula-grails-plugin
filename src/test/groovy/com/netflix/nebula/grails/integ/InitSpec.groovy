@@ -90,7 +90,7 @@ class InitSpec extends IntegSpec {
 
         where:
         versionAndTask << ["2.3.5", "2.4.0"].collectMany { String version ->
-            ['init-grails', 'init-plugin'].collect { String task ->
+            ['init-app', 'init-plugin'].collect { String task ->
                 [task: task, version: GrailsVersion.parse(version)]
             }
         }

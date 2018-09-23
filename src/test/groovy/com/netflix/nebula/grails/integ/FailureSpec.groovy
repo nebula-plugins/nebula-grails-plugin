@@ -45,7 +45,7 @@ class FailureSpec extends IntegSpec {
         """
 
         when:
-        def result = runTasks("init-grails", "-s")
+        def result = runTasks("init-app", "-s")
         if (!result.success) {
             println(result.standardOutput)
             println(result.standardError)
