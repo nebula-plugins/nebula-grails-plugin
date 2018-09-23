@@ -15,7 +15,7 @@ import com.netflix.nebula.grails.GrailsProject
  */
 class GrailsTaskConfigurator {
 
-    public static final String GRAILS_INIT_TASK = 'init'
+    public static final String GRAILS_INIT_TASK = 'init-grails'
     public static final String GRAILS_INIT_PLUGIN_TASK = 'init-plugin'
     public static final String GRAILS_TEST_TASK = JavaPlugin.TEST_TASK_NAME
     public static final String GRAILS_RUN_TASK = 'run'

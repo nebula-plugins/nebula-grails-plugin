@@ -25,7 +25,7 @@ class TaskConfigurationSpec extends PluginSpec {
     def "basic tasks are in place"() {
         given:
         def baseTasks = ['check', 'build', 'assemble', 'clean']
-        def grailsTasks = ['init', 'init-plugin', 'test', 'run', 'war']
+        def grailsTasks = ['init-grails', 'init-plugin', 'test', 'run', 'war']
 
         expect:
         (baseTasks + grailsTasks).each {

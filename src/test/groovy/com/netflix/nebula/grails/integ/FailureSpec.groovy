@@ -39,17 +39,13 @@ class FailureSpec extends IntegSpec {
         """
 
         buildFile << """
-            init {
-            // jvmOptions { jvmArgs "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005" }
-            }
-
             task "package"(type: GrailsTask) {
                 //jvmOptions { jvmArgs "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5008" }
             }
         """
 
         when:
-        def result = runTasks("init", "-s")
+        def result = runTasks("init-grails", "-s")
         if (!result.success) {
             println(result.standardOutput)
             println(result.standardError)
