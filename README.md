@@ -9,6 +9,8 @@ Nebula Grails Plugin
 
 Fork of the Grails 2.x Gradle plugin providing later Gradle version and plugin portal support.
 
+***NOTE: this project is not active anymore***
+
 # Quick Start
 
 Refer to the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/nebula.grails) for instructions on how to apply the plugin.
