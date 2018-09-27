@@ -62,7 +62,6 @@ class GrailsSourceSetConfigurator {
                     ]
                 }
                 output.with {
-                    classesDir = buildPath(grailsProject, 'classes')
                     ['plugin-build-classes', 'plugin-classes', 'plugin-provided-classes'].each {
                         dir buildPath(grailsProject, it)
                     }
@@ -73,6 +72,7 @@ class GrailsSourceSetConfigurator {
         }
 
         project.sourceSets(sourceSetClosure)
+        project.sourceSets.main.groovy.outputDir = new File(buildPath(grailsProject, 'classes'))
     }
 
     String buildPath(GrailsProject project, String path) {
@@ -92,12 +92,10 @@ class GrailsSourceSetConfigurator {
                         'test/unit'
                     ]
                 }
-                output.with {
-                    classesDir = buildPath(grailsProject, 'test-classes')
-                }
             }
         }
 
         project.sourceSets(sourceSetClosure)
+        project.sourceSets.main.groovy.outputDir = new File(buildPath(grailsProject, 'classes'))
     }
 }
