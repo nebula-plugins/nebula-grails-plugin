@@ -44,7 +44,7 @@ class GrailsTestTask extends GrailsTask {
 
     @OutputDirectories
     Set<File> getSourceOutputs() {
-        [sourceSets.getByName('main').output.classesDir, sourceSets.getByName('test').output.classesDir]
+        [sourceSets.getByName('main').groovy.outputDir, sourceSets.getByName('main').java.outputDir,  sourceSets.getByName('test').groovy.outputDir, sourceSets.getByName('test').java.outputDir]
     }
 
     @Override
