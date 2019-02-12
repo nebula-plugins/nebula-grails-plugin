@@ -19,6 +19,7 @@ package com.netflix.nebula.grails
 import org.gradle.testfixtures.ProjectBuilder
 import com.netflix.nebula.grails.tasks.GrailsPluginPackageTask
 import com.netflix.nebula.grails.tasks.GrailsWarTask
+import spock.lang.Ignore
 
 class TaskConfigurationSpec extends PluginSpec {
 
@@ -143,6 +144,7 @@ class ${project.name.capitalize()}GrailsPlugin { }
         task.command == "test"
     }
 
+    @Ignore
     def "can log task classpath"() {
         given:
         def task = grailsTask("compile")
