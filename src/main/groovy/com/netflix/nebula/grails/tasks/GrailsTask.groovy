@@ -44,7 +44,7 @@ import java.lang.reflect.Constructor
  */
 class GrailsTask extends DefaultTask {
 
-    static private final GRADLE_FIVE_TWO = "5.2"
+    static private final GRADLE_FIVE_THREE = "5.3"
     static public final GRAILS_TASK_PREFIX = "grails-"
     static public final GRAILS_ARGS_PROPERTY = 'grailsArgs'
     static public final GRAILS_ENV_PROPERTY = 'grailsEnv'
@@ -92,8 +92,8 @@ class GrailsTask extends DefaultTask {
     private JavaForkOptions instantiateDefaultJavaForkOptions() {
         JavaForkOptions javaForkOptions
         GradleVersion gradleVersion = GradleVersion.version(project.gradle.gradleVersion)
-        boolean isHigherThanFiveTwo = gradleVersion.compareTo(GradleVersion.version(GRADLE_FIVE_TWO)) > 0
-        if(isHigherThanFiveTwo) {
+        boolean isHigherThanFiveThree = gradleVersion.compareTo(GradleVersion.version(GRADLE_FIVE_THREE)) > 0
+        if(project.gradle.gradleVersion == GRADLE_FIVE_THREE || isHigherThanFiveThree) {
             Constructor defaultJavaForkOptionsConstructor = DefaultJavaForkOptions.class.getConstructor(PathToFileResolver.class, FileCollectionFactory.class)
             javaForkOptions = (DefaultJavaForkOptions ) defaultJavaForkOptionsConstructor.newInstance(getServices().get(FileResolver), getServices().get(FileCollectionFactory))
         } else {
