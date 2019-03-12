@@ -93,7 +93,7 @@ class GrailsTask extends DefaultTask {
         JavaForkOptions javaForkOptions
         GradleVersion gradleVersion = GradleVersion.version(project.gradle.gradleVersion)
         boolean isHigherThanFiveThree = gradleVersion.compareTo(GradleVersion.version(GRADLE_FIVE_THREE)) > 0
-        if(project.gradle.gradleVersion == GRADLE_FIVE_THREE || isHigherThanFiveThree) {
+        if(project.gradle.gradleVersion.startsWith(GRADLE_FIVE_THREE) || isHigherThanFiveThree) {
             Constructor defaultJavaForkOptionsConstructor = DefaultJavaForkOptions.class.getConstructor(PathToFileResolver.class, FileCollectionFactory.class)
             javaForkOptions = (DefaultJavaForkOptions ) defaultJavaForkOptionsConstructor.newInstance(getServices().get(FileResolver), getServices().get(FileCollectionFactory))
         } else {
