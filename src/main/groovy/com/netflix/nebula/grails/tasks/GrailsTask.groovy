@@ -25,7 +25,9 @@ import org.gradle.api.internal.file.FileResolver
 import org.gradle.api.tasks.*
 import org.gradle.internal.file.PathToFileResolver
 import org.gradle.process.ExecResult
+import org.gradle.process.JavaDebugOptions
 import org.gradle.process.JavaForkOptions
+import org.gradle.process.internal.DefaultJavaDebugOptions
 import org.gradle.process.internal.DefaultJavaForkOptions
 import org.gradle.process.internal.ExecException
 import org.gradle.process.internal.JavaExecAction
@@ -45,6 +47,7 @@ import java.lang.reflect.Constructor
 class GrailsTask extends DefaultTask {
 
     static private final GRADLE_FIVE_THREE = "5.3"
+    static private final GRADLE_FIVE_SIX = "5.6"
     static public final GRAILS_TASK_PREFIX = "grails-"
     static public final GRAILS_ARGS_PROPERTY = 'grailsArgs'
     static public final GRAILS_ENV_PROPERTY = 'grailsEnv'
@@ -93,7 +96,11 @@ class GrailsTask extends DefaultTask {
         JavaForkOptions javaForkOptions
         GradleVersion gradleVersion = GradleVersion.version(project.gradle.gradleVersion)
         boolean isHigherThanFiveThree = gradleVersion.compareTo(GradleVersion.version(GRADLE_FIVE_THREE)) > 0
-        if(project.gradle.gradleVersion.startsWith(GRADLE_FIVE_THREE) || isHigherThanFiveThree) {
+        boolean isHigherThanFiveSix = gradleVersion.compareTo(GradleVersion.version(GRADLE_FIVE_SIX)) > 0
+        if(project.gradle.gradleVersion.startsWith(GRADLE_FIVE_SIX) || isHigherThanFiveSix) {
+            Constructor defaultJavaForkOptionsConstructor = DefaultJavaForkOptions.class.getConstructor(PathToFileResolver.class, FileCollectionFactory.class, JavaDebugOptions.class )
+            javaForkOptions = (DefaultJavaForkOptions ) defaultJavaForkOptionsConstructor.newInstance(getServices().get(FileResolver), getServices().get(FileCollectionFactory), new DefaultJavaDebugOptions())
+        } else if(project.gradle.gradleVersion.startsWith(GRADLE_FIVE_THREE) || isHigherThanFiveThree) {
             Constructor defaultJavaForkOptionsConstructor = DefaultJavaForkOptions.class.getConstructor(PathToFileResolver.class, FileCollectionFactory.class)
             javaForkOptions = (DefaultJavaForkOptions ) defaultJavaForkOptionsConstructor.newInstance(getServices().get(FileResolver), getServices().get(FileCollectionFactory))
         } else {
