@@ -74,6 +74,7 @@ class GrailsTestTask extends GrailsTask {
         [phases?.join(' '), grailsArgs, testSingle].findAll { it }.join(' ')
     }
 
+    @Input
     String getTestSingle() {
         return System.getProperty('test.single', '')
     }

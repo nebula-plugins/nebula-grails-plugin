@@ -57,12 +57,19 @@ class GrailsTask extends DefaultTask {
     static public final String APP_GRAILS_VERSION = 'app.grails.version'
     static public final String APP_VERSION = 'app.version'
 
-    String grailsVersion
+    @Optional @Input String grailsVersion
 
     String grailsHome
-    String command
-    CharSequence args
-    String env
+
+    @Optional @Input Boolean pluginProject
+
+    @Optional @Input String command
+
+    @Optional @Input CharSequence args
+
+    @Optional @Input String env
+
+    @Internal
     boolean reload
 
     @Optional @InputFiles FileCollection providedClasspath
@@ -74,17 +81,19 @@ class GrailsTask extends DefaultTask {
 
     @InputFiles FileCollection bootstrapClasspath
 
-    boolean useRuntimeClasspathForBootstrap
+    @Internal boolean useRuntimeClasspathForBootstrap
 
-    JavaForkOptions jvmOptions
-    SourceSetContainer sourceSets
+    @Internal JavaForkOptions jvmOptions
+
+    @Internal SourceSetContainer sourceSets
 
     private projectDir
-    private projectWorkDir
-    private boolean pluginProject
 
-    boolean forwardStdIn
-    boolean captureOutputToInfo
+    private projectWorkDir
+
+    @Optional @Input Boolean forwardStdIn
+
+    @Optional @Input Boolean captureOutputToInfo
 
     GrailsTask() {
         this.jvmOptions = instantiateDefaultJavaForkOptions()
@@ -110,22 +119,19 @@ class GrailsTask extends DefaultTask {
         return javaForkOptions
     }
 
-    @Input
+    @Internal
     File getProjectDir() {
         projectDir == null ? null : project.file(projectDir)
     }
 
-    @Input
+    @Internal
     File getProjectWorkDir() {
         projectWorkDir == null ? null : project.file(projectWorkDir)
     }
 
+    @Internal
     File getGrailsHome() {
         grailsHome == null ? null : project.file(grailsHome)
-    }
-
-    public JavaForkOptions getJvmOptions() {
-        return jvmOptions
     }
 
     public void jvmOptions(Action<JavaForkOptions> configure) {
@@ -186,15 +192,15 @@ class GrailsTask extends DefaultTask {
         result.assertNormalExitValue()
     }
 
-    File getEffectiveGrailsHome() {
+    private File getEffectiveGrailsHome() {
         getGrailsHome() ?: (project.hasProperty('grailsHome') ? project.file(project.grailsHome) : null)
     }
 
-    protected GrailsVersion getParsedGrailsVersion() {
+    private GrailsVersion getParsedGrailsVersion() {
         new GrailsVersionParser().parse(getGrailsVersion() ?: project.grailsVersion)
     }
 
-    boolean isEffectiveUseRuntimeClasspathForBootstrap() {
+    private boolean isEffectiveUseRuntimeClasspathForBootstrap() {
         getCommand() in ["run-app", "test-app", "release-plugin"] || isUseRuntimeClasspathForBootstrap()
     }
 
@@ -222,7 +228,7 @@ class GrailsTask extends DefaultTask {
         }
     }
 
-    protected Collection<File> getEffectiveBootstrapClasspath() {
+    private Collection<File> getEffectiveBootstrapClasspath() {
         def classpath = getBootstrapClasspath().files
         if (isEffectiveUseRuntimeClasspathForBootstrap()) {
             classpath.addAll(getRuntimeClasspath().files)
@@ -293,11 +299,11 @@ class GrailsTask extends DefaultTask {
         }
     }
 
-    protected boolean isPluginProject() {
+    private boolean isPluginProject() {
         getProjectDir().listFiles({ dir, name -> name ==~ /.*GrailsPlugin.groovy/} as FilenameFilter) as boolean
     }
 
-    protected File projectDirFile(String path) {
+    private File projectDirFile(String path) {
         new File(getProjectDir(), path)
     }
 
@@ -307,7 +313,7 @@ class GrailsTask extends DefaultTask {
 
     private void handleVersionSync() {
         File appProperties = project.file('application.properties')
-        URLClassLoader cl = new URLClassLoader(effectiveBootstrapClasspath.collect { it.toURI().toURL() } as URL[])
+        URLClassLoader cl = new URLClassLoader(getEffectiveBootstrapClasspath().collect { it.toURI().toURL() } as URL[])
         Class metadataClass = cl.loadClass('grails.util.Metadata')
         Object metadata = metadataClass.newInstance(appProperties)
         if (syncVersions(metadata)) {
