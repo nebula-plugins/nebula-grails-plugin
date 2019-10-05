@@ -144,7 +144,6 @@ class GrailsTaskConfigurator {
         project.configurations.default.extendsFrom(project.configurations.runtime)
         project.afterEvaluate {
             project.artifacts.add('runtime', grailsAssemble.outputFile) {
-                type grailsAssemble.outputFile.path.tokenize('.').last()
                 builtBy grailsAssemble
             }
         }
