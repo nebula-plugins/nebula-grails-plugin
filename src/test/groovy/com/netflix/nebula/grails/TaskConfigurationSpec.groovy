@@ -67,7 +67,7 @@ class TaskConfigurationSpec extends PluginSpec {
 
         expect:
         GrailsWarTask war = project.tasks.getByName('war')
-        assert war.outputFile.path == project.file("build/distributions/${project.name}-1.0.war").path
+        assert war.outputFile.asFile.get().path == project.file("build/distributions/${project.name}-1.0.war").path
 
         and:
         assert artifactFiles.size() == 1
@@ -118,7 +118,7 @@ class ${project.name.capitalize()}GrailsPlugin { }
 
         expect:
         GrailsPluginPackageTask war = project.tasks.getByName('packagePlugin')
-        assert war.outputFile.path == project.file("grails-${project.name}-1.0.zip").path
+        assert war.outputFile.asFile.get().path == project.file("grails-${project.name}-1.0.zip").path
 
         and:
         assert artifactFiles.size() == 1
