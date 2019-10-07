@@ -32,6 +32,6 @@ class GrailsWarTask extends GrailsAssembleTask {
 
     @Override
     CharSequence getArgs() {
-        return "${-> output} ${-> super.args}"
+        return "${-> outputFile.get().asFile} ${-> super.args}"
     }
 }
