@@ -16,6 +16,8 @@
 
 package com.netflix.nebula.grails
 
+import com.netflix.nebula.grails.tasks.GrailsPluginPackageTask
+import com.netflix.nebula.grails.tasks.GrailsWarTask
 import org.gradle.api.InvalidUserDataException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -157,7 +159,7 @@ class GrailsPlugin implements Plugin<Project> {
                 project.publishing {
                     publications {
                         withType(IvyPublication) {
-                            artifact(getGrailsOutputArtifact(project)) {
+                            artifact(getGrailsOutputArtifact(project).asFile.get()) {
                                 conf "runtime"
                             }
                             descriptor.withXml { XmlProvider xml ->
@@ -185,9 +187,9 @@ class GrailsPlugin implements Plugin<Project> {
 
     RegularFileProperty getGrailsOutputArtifact(Project project) {
         if (isGrailsPluginProject(project)) {
-            project.tasks.findByName(GrailsTaskConfigurator.GRAILS_PACKAGE_PLUGIN_TASK).outputFile
+            (project.tasks.findByName(GrailsTaskConfigurator.GRAILS_PACKAGE_PLUGIN_TASK) as GrailsPluginPackageTask).outputFile
         } else {
-            project.tasks.findByName(GrailsTaskConfigurator.GRAILS_WAR_TASK).outputFile
+            (project.tasks.findByName(GrailsTaskConfigurator.GRAILS_WAR_TASK) as GrailsWarTask).outputFile
         }
     }
 
