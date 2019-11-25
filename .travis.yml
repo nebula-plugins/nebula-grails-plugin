@@ -1,5 +1,10 @@
 language: java
-jdk: openjdk8
+matrix:
+  include:
+    - jdk: openjdk8
+      env: GRADLE_PUBLISH=true
+    - jdk: openjdk11
+      env: GRADLE_PUBLISH=false
 install: true
 script: "./gradle/buildViaTravis.sh"
 cache:
