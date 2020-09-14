@@ -163,7 +163,12 @@ class GrailsTask extends DefaultTask {
         ExecResult result = project.javaexec {
             JavaExecAction action = delegate
             action.ignoreExitValue = true
-            getJvmOptions().copyTo(action)
+            JavaForkOptions jvmOptions = getJvmOptions()
+            //We should not copy the executable value if it is null, this prevents from running a java process
+            if(!jvmOptions.executable) {
+                jvmOptions.executable(action.executable)
+            }
+            jvmOptions.copyTo(action)
             if (forwardStdIn) {
                 action.standardInput = System.in
             }
