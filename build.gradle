@@ -33,7 +33,7 @@ contacts {
 }
 
 dependencies {
-    compile ('org.grails:grails-launcher:1.1') {
+    implementation ('org.grails:grails-launcher:1.1') {
         exclude module: 'groovy-all'
     }
 }
