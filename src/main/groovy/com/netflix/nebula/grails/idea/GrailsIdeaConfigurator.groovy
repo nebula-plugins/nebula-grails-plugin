@@ -19,7 +19,7 @@ class GrailsIdeaConfigurator {
                 def configurations = project.configurations
                 //Map IDEA scopes to Gradle configurations
                 module.scopes = [
-                        PROVIDED: [plus: [configurations.compileOnly], minus: []],
+                        PROVIDED: [plus: [configurations.provided], minus: []],
                         COMPILE: [plus: [configurations.compile], minus: []],
                         RUNTIME: [plus: [configurations.runtime], minus: [configurations.compile]],
                         TEST: [plus: [configurations.test], minus: [configurations.runtime]]

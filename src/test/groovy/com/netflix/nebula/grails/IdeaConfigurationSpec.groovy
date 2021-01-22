@@ -27,7 +27,7 @@ class IdeaConfigurationSpec extends PluginSpec {
         project.idea.module.scopes.keySet() == ['PROVIDED', 'COMPILE', 'RUNTIME', 'TEST'] as Set
 
         and:
-        project.configurations.compileOnly in project.idea.module.scopes.PROVIDED.plus
+        project.configurations.provided in project.idea.module.scopes.PROVIDED.plus
         project.configurations.compile in project.idea.module.scopes.COMPILE.plus
         project.configurations.runtime in project.idea.module.scopes.RUNTIME.plus
         project.configurations.compile in project.idea.module.scopes.RUNTIME.minus
