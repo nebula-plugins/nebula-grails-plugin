@@ -304,7 +304,7 @@ class GrailsTask extends DefaultTask {
         }
     }
 
-    private boolean isPluginProject() {
+    private boolean isGrailsPluginProject() {
         getProjectDir().listFiles({ dir, name -> name ==~ /.*GrailsPlugin.groovy/} as FilenameFilter) as boolean
     }
 
@@ -336,7 +336,7 @@ class GrailsTask extends DefaultTask {
             result = true
         }
 
-        if (!isPluginProject()) {
+        if (!isGrailsPluginProject()) {
             Object appVersion = metadata.get(APP_VERSION)
             if (appVersion != null) {
                 if (!project.version.equals(appVersion)) {
