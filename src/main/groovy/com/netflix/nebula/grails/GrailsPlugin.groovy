@@ -70,7 +70,7 @@ class GrailsPlugin implements Plugin<Project> {
 
         Configuration compileConfiguration = getOrCreateConfiguration(project, "compile")
         Configuration compileOnlyConfiguration = getOrCreateConfiguration(project, "compileOnly")
-        Configuration providedConfiguration = getOrCreateConfiguration(project, "provided")
+        Configuration providedConfiguration = getOrCreateConfiguration(project, "providedClasspath")
         providedConfiguration.extendsFrom(compileOnlyConfiguration)
         providedConfiguration.setCanBeResolved(true)
         Configuration runtimeConfiguration = getOrCreateConfiguration(project, "runtime")
