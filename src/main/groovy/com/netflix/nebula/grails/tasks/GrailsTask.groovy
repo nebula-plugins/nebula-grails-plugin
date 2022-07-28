@@ -157,8 +157,8 @@ class GrailsTask extends DefaultTask {
         // Capture output and only display to console in error conditions
         // if capture is enabled and info logging is not enabled.
         def capture = captureOutputToInfo && !logger.infoEnabled
-        OutputStream out = capture ? new ByteArrayOutputStream() : System.out
-        OutputStream err = capture ? new ByteArrayOutputStream() : System.err
+        OutputStream out =  new ByteArrayOutputStream()
+        OutputStream err = new ByteArrayOutputStream()
 
         ExecResult result = project.javaexec {
             JavaExecAction action = delegate
@@ -175,6 +175,7 @@ class GrailsTask extends DefaultTask {
             action.standardOutput = out
             action.errorOutput = err
             launcher.execute(action)
+            action
         }
 
         try {

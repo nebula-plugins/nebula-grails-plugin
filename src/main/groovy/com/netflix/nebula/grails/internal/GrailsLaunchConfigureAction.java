@@ -60,7 +60,7 @@ public class GrailsLaunchConfigureAction implements Action<JavaExecSpec> {
 
             File launcherJar = findJarFile(ForkedGrailsLauncher.class);
             javaExec.classpath(launcherJar);
-            javaExec.setMain(Main.class.getName());
+            javaExec.getMainClass().set(Main.class.getName());
             javaExec.args(contextDestination.getAbsolutePath());
         } catch (IOException e) {
             throw new RuntimeException(e);
